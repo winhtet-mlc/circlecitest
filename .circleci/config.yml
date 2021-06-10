@@ -3,14 +3,14 @@ jobs:
   convert:
     docker:
       - image: jupyter/datascience-notebook
-    working_directory: ~/Test-Config
     steps:
       - run:
           command: |
+            cd
             pip install jupyter
             pip install nb2hugo
             touch logs.txt
-            python /home/mlc/hugoSites/Test-Config/convert-to-md.py -d
+            python convert-to-md.py -d
       - persist_to_workspace:
           root: content
           paths: .
