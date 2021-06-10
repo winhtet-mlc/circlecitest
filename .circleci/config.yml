@@ -1,11 +1,12 @@
 version: 2.1
 jobs:
   convert:
-    working_directory: ~/Test-Config
+    working_directory: ~/circlecitest
     docker:
       - image: jupyter/datascience-notebook
     steps:
-      - checkout
+      - checkout:
+          path: ~/circlecitest
       - run:
           command: |
             cd
