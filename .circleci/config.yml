@@ -1,0 +1,46 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: z0li/hugo-builder:latest
+    working_directory: /src
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
+      - checkout
+      - run: git submodule update --init
+      - run: hugo -v -s /src -d /src/public
+
+  test:
+    docker:
+      - image: z0li/hugo-builder:latest
+    working_directory: /src
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
+      - checkout
+      - run:
+          name: test the generated html files
+          command: htmlproofer /src/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
+
+  deploy:
+    docker:
+      - image: z0li/hugo-builder:latest
+    working_directory: /src
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
+      - checkout
+      - run:
+          name: push
+          command: sh deploy.sh
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+      - deploy
