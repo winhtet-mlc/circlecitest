@@ -1,20 +1,36 @@
 version: 2.1
 jobs:
+  convert:
+    docker:
+      - image: jupyter/datascience-notebook
+    working_directory: ~/Test-Config
+    steps:
+      - run:
+          command: |
+            pip install jupyter
+            pip install nb2hugo
+            touch logs.txt
+            python convert-to-md.py -d
+      - persist_to_workspace:
+          root: content
+          paths: .
   build:
     docker:
-      - image: z0li/hugo-builder:latest
-    working_directory: /src
+      - image: cibuilds/hugo:latest
+    working_directory: ~/content
+    environment:
+      HUGO_BUILD_DIR: public
     steps:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
       - checkout
-      - run: git submodule update --init
-      - run: hugo -v -s /src -d /src/public
+      - run: apk update && apk add git
+      - run: HUGO_ENV=production hugo -F -v -d $HUGO_BUILD_DIR
 
   test:
     docker:
-      - image: z0li/hugo-builder:latest
+      - image: cibuilds/hugo:latest
     working_directory: /src
     steps:
       - add_ssh_keys:
@@ -25,24 +41,9 @@ jobs:
           name: test the generated html files
           command: htmlproofer /src/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
 
-  deploy:
-    docker:
-      - image: z0li/hugo-builder:latest
-    working_directory: /src
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
-      - checkout
-      - run: git config user.name "CircleCI"
-      - run: git config user.email "winhtet1997@gmail.com"
-      - run: git add -A
-      - run: git commit -m "Automated deployment job ${CIRCLE_BRANCH}"
-      - run: git push origin master
-
 workflows:
   build_and_test:
     jobs:
+      - convert
       - build
       - test
-      - deploy
