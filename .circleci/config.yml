@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: jupyter/datascience-notebook
     steps:
+      - checkout
       - run:
           command: |
             cd
