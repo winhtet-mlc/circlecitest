@@ -10,7 +10,7 @@ jobs:
             pip install jupyter
             pip install nb2hugo
             touch logs.txt
-            python convert-to-md.py -d
+            python /home/mlc/hugoSites/Test-Config/convert-to-md.py -d
       - persist_to_workspace:
           root: content
           paths: .
