@@ -1,7 +1,6 @@
 version: 2.1
 jobs:
   convert:
-    working_directory: ~/circlecitest
     docker:
       - image: jupyter/datascience-notebook
     steps:
