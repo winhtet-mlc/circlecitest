@@ -4,9 +4,13 @@ jobs:
     docker:
       - image: jupyter/datascience-notebook
     steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
       - run:
           command: |
-            docker run -p 8888:8888 -v /desired/host/folder:/home/jovyan/workspace jupyter/all-spark-notebook
+            docker run -p 8888:8888 -v /desired/host/folder:/home/jovyan/workspace jupyter/datascience-notebook
             pip install jupyter
             pip install nb2hugo
             touch logs.txt
