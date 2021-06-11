@@ -6,6 +6,7 @@ jobs:
     steps:
       - run:
           command: |
+            docker run -p 8888:8888 -v /desired/host/folder:/home/jovyan/workspace jupyter/all-spark-notebook
             pip install jupyter
             pip install nb2hugo
             touch logs.txt
