@@ -46,10 +46,7 @@ jobs:
             - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
       - checkout
       - run:
-          name: push
-          command: |
-            hugo
-            hugo server -D --bind=localhost --baseUrl=http://localhost:1313/
+          command: hugo server -D
 
 workflows:
   build_and_test:
