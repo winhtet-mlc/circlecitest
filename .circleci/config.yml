@@ -5,15 +5,13 @@ jobs:
     docker:
       - image: jupyter/datascience-notebook
     steps:
-      - checkout:
-          path: ~/circlecitest
       - run:
           command: |
-            cd
             pip install jupyter
             pip install nb2hugo
             touch logs.txt
             python convert-to-md.py -d
+          working_directory: ~/circlecitest
       - persist_to_workspace:
           root: content
           paths: .
@@ -28,8 +26,10 @@ jobs:
           fingerprints:
             - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
       - checkout
-      - run: apk update && apk add git
-      - run: HUGO_ENV=production hugo -F -v -d $HUGO_BUILD_DIR
+      - run:
+          command: |
+            apk update && apk add git
+            HUGO_ENV=production hugo -F -v -d $HUGO_BUILD_DIR
 
   test:
     docker:
