@@ -36,7 +36,7 @@ jobs:
           root: public
           paths: .
 
-  test:
+  deploy:
     docker:
       - image: cibuilds/hugo:latest
     working_directory: ~/circlecitest
@@ -46,12 +46,12 @@ jobs:
             - "SHA256:Rv/k4RqvmRlcCpuuilLxk9TePZ+unXvAOvUZwgF/u3Q winhtet1997@gmail.com"
       - checkout
       - run:
-          name: test the generated html files
-          command: htmlproofer ~/circlecitest --allow-hash-href --check-html --empty-alt-ignore --disable-external
+          name: push
+          command: git push origin master
 
 workflows:
   build_and_test:
     jobs:
       - convert
       - build
-      - test
+      - deploy
