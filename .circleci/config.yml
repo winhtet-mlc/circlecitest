@@ -9,6 +9,7 @@ jobs:
           version: 19.03.13
       - run:
           command: |
+            docker run -it --rm -p 8888:8888 -p 4040:4040 -v ~/circlecitest:/home/jovyan/workspace jupyter/datascience-notebook
             pip install jupyter
             pip install nb2hugo
             touch logs.txt
