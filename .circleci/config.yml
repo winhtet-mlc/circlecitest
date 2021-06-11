@@ -1,9 +1,4 @@
 version: 2.1
-services:
-  nginx:
-    image: nginx:latest
-    ports:
-      - 192.168.125.129:1313
 jobs:
   convert:
     working_directory: ~/circlecitest
@@ -54,7 +49,7 @@ jobs:
           name: push
           command: |
             hugo
-            hugo server -D --bind=192.168.125.129 --baseUrl=http://192.168.125.129:1313/
+            hugo server -D --bind=localhost --baseUrl=http://localhost:1313/
 
 workflows:
   build_and_test:
