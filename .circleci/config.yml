@@ -1,4 +1,9 @@
 version: 2.1
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 192.168.125.129:1313
 jobs:
   convert:
     working_directory: ~/circlecitest
