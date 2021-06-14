@@ -47,8 +47,19 @@ jobs:
              ssh $SSH_USER@$SSH_HOST "python -m http.server 8000"
 
 workflows:
-  build_and_test:
+  version: 2.1
+  build:
     jobs:
       - convert
-      - build
-      - deploy
+      - build:
+          requires:
+            - convert
+          filters:
+            branches:
+              only: main
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
