@@ -54,10 +54,9 @@ jobs:
       - run:
            name: Deploy
            command: |
-             git clone --single-branch --branch master git@github.com:winhtet-mlc/circlecitest.git master
-             cd master
              git config user.name "winhtet-mlc"
              git config user.email "winhtet1997@gmail.com"
-             git add .
-             git commit -m "Automated deployment job"
+             git checkout master
+             git pull origin master
+             git merge test
              git push origin master
