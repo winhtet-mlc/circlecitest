@@ -54,4 +54,4 @@ jobs:
       - run:
            name: Deploy Over SSH
            command: |
-             ssh $SSH_USER@$SSH_HOST "hugo server -D"
+             sh deploy.sh
