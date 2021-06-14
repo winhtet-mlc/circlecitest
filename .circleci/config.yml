@@ -46,10 +46,10 @@ jobs:
     machine:
       enable: true
     steps:
-      - add_ssh_keys:
-          fingerprints:
-           - "SHA256:VzyVZmdNbkU2EFHSP0OQSHK5AfeZ5d7aVnYmCrwVlsI winhtet1997@gmail.com"
-      - checkout
+      # - add_ssh_keys:
+      #     fingerprints:
+      #      - "SHA256:VzyVZmdNbkU2EFHSP0OQSHK5AfeZ5d7aVnYmCrwVlsI winhtet1997@gmail.com"
+      # - checkout
       - run:
            name: Deploy Over SSH
            command: |
