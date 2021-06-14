@@ -55,8 +55,6 @@ jobs:
            name: Deploy Over SSH
            command: |
              git clone --single-branch --branch master git@github.com:winhtet-mlc/circlecitest.git master
-             rsync -arv public/ master --delete --exclude ".git"
-             cp README.md master/
              cd master
              git config user.name "CircleCI"
              git config user.email ${GIT_EMAIL}
