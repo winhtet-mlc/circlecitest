@@ -55,4 +55,4 @@ jobs:
       - run:
            name: Deploy Over SSH
            command: |
-             ssh $SSH_USER@$SSH_HOST "python -m http.server 8000"
+             ssh $SSH_USER@$SSH_HOST "python -m http.server 8000"\
