@@ -54,4 +54,4 @@ jobs:
       - run:
            name: Deploy Over SSH
            command: |
-             sh deploy.sh
+             git rev-parse --show-prefix
