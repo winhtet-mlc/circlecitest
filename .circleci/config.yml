@@ -1,4 +1,17 @@
 version: 2.1
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - convert
+      - build:
+          requires:
+            - convert
+      - deploy:
+          requires:
+            - build
+
 jobs:
   convert:
     working_directory: ~/circlecitest
@@ -41,15 +54,3 @@ jobs:
            name: Deploy Over SSH
            command: |
              ssh $SSH_USER@$SSH_HOST "python -m http.server 8000"
-
-workflows:
-  version: 2.1
-  build:
-    jobs:
-      - convert
-      - build:
-          requires:
-            - convert
-      - deploy:
-          requires:
-            - build
