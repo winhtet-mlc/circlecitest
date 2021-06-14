@@ -15,8 +15,8 @@ jobs:
             touch logs.txt
             python convert-to-md.py -d
       - persist_to_workspace:
-          root: content
-          paths: .
+          root: .
+          paths: content
   build:
     docker:
       - image: cibuilds/hugo:latest
@@ -30,8 +30,8 @@ jobs:
             apk update && apk add git
             HUGO_ENV=production hugo -F -v -d $HUGO_BUILD_DIR
       - persist_to_workspace:
-          root: public
-          paths: .
+          root: .
+          paths: public
 
   deploy:
     machine:
