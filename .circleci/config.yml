@@ -49,7 +49,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-           - "SHA256:VzyVZmdNbkU2EFHSP0OQSHK5AfeZ5d7aVnYmCrwVlsI winhtet1997@gmail.com"
+           - "SHA256:6VpFJAKjenFTnN+RbUIATGyhWnKJ3BRK14lDBQFhTtQ winhtet1997@gmail.com"
       - checkout
       - run:
            name: Deploy Over SSH
