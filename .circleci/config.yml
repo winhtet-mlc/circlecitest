@@ -45,6 +45,8 @@ jobs:
             - public
 
   deploy:
+    machine:
+      enable: true
     steps:
       - add_ssh_keys:
           fingerprints:
