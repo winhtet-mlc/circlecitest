@@ -52,7 +52,7 @@ jobs:
            - "SHA256:6VpFJAKjenFTnN+RbUIATGyhWnKJ3BRK14lDBQFhTtQ winhtet1997@gmail.com"
       - checkout
       - run:
-           name: Deploy Over SSH
+           name: Deploy
            command: |
              git clone --single-branch --branch master git@github.com:winhtet-mlc/circlecitest.git master
              cd master
