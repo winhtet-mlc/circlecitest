@@ -54,9 +54,14 @@ jobs:
       - run:
            name: Deploy
            command: |
-             git config user.name "winhtet-mlc"
-             git config user.email "winhtet1997@gmail.com"
-             git checkout master
-             git pull origin master
-             git merge dev
+             git config --global user.name ${GIT_USER_NAME}
+             git config --global user.email ${GIT_USER_EMAIL}
+             git clone https://github.com/winhtet-mlc/circlecitest.git
+             ls
+             cp -rp public/* circlecitest/
+             cd circlecitest
+             ls
+             git remotr set-url origin git@github.com:winhtet-mlc/circlecitest.git
+             git add .
+             git commit -m "Automated Deploy"
              git push origin master
